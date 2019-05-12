@@ -13,24 +13,16 @@ def botStart():
     @bot.message_handler(commands=['start', 'help'])
     def send_welcome(message):
         bot.reply_to(message, "Howdy, how are you doing?")
-    while(True):
-        time.sleep(10)
 
+    while(True):
+        time.sleep(5)
         response = requests.get('https://official-joke-api.appspot.com/jokes/programming/random').json()
         print(response[0]["setup"] + response[0]["punchline"])
 
-        bot.send_message(chat_id="@telegaJokesTes", text=response[0]["setup"] + response[0]["punchline"])
+        bot.send_message(chat_id="@telegaJokesTes", text=response[0]["setup"] + " " + response[0]["punchline"])
     #bot.polling()
     #bot.send_message(channelId,response.content.strip())
 
 
-def jokesAPI():
-    response = requests.get("https://webknox-jokes.p.rapidapi.com/jokes/search?category=Chuck+Norris&minRating=5&numJokes=5&keywords=kick%2C+hard",
-      headers={
-        "X-RapidAPI-Host": "webknox-jokes.p.rapidapi.com",
-        "X-RapidAPI-Key": "e5f3bc84bcmsh4ead144aded4d81p1585ccjsnd9e58d1a0d20"
-      }
-    )
-    print(response)
 
-jokesAPI()
+botStart()
