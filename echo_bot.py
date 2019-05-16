@@ -21,11 +21,21 @@ def botStart(): #send to telegram
         bot.reply_to(message, "Howdy, how are you doing?")
 
     while(True):
-        response = requests.get('https://official-joke-api.appspot.com/jokes/programming/random').json()
-        print(response[0]["setup"] + response[0]["punchline"])
+       # response = requests.get('https://official-joke-api.appspot.com/jokes/programming/random').json()
+       # print(response[0]["setup"] + response[0]["punchline"])
+       # bot.send_message(chat_id="@telegaJokesTes", text=response[0]["setup"] + " " + response[0]["punchline"])
+        response = requests.get('https://sv443.net/jokeapi/category/Any').json()
 
-        bot.send_message(chat_id="@telegaJokesTes", text=response[0]["setup"] + " " + response[0]["punchline"])
-        time.sleep(600)
+        if 'setup' in response:
+            print(response["setup"] + " " + response["delivery"])
+            bot.send_message(chat_id="@telegaJokesTes", text=response["setup"] + " " + response["delivery"])
+        elif 'joke' in response:
+            print(response["joke"])
+            bot.send_message(chat_id="@telegaJokesTes", text=response["joke"])
+
+
+
+        time.sleep(5)
     #bot.polling()
     #bot.send_message(channelId,response.content.strip())
 
